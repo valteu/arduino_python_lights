@@ -1,4 +1,5 @@
 
+
 int data;
 #include <FastLED.h>
 
@@ -11,6 +12,7 @@ int data;
 CRGB leds[NUM_LEDS];
 
 void setup() { 
+  FastLED.clear();
   Serial.begin(9600); //initialize serial COM at 9600 baudrate
   pinMode(LED_BUILTIN, OUTPUT); //make the LED pin (13) as output
   digitalWrite (LED_BUILTIN, LOW);
@@ -32,4 +34,6 @@ if (data == '1')
     FastLED.show();
     delay(25); /* Change this to your hearts desire, the lower the value the faster your colors move (and vice versa) */
   }
+if (data == '0') /* pause led*/
+  FastLED.clear();
 }
