@@ -1,5 +1,5 @@
 String data;
-String var;
+String mode;
 String num_led;
 int brightness;
 
@@ -27,7 +27,7 @@ while (Serial.available()){
     data = Serial.read();
     if (i == 0)
     {
-      var = data.toInt();
+      mode = data;
     }
     else if (i == 1){
       num_led = data;
@@ -37,51 +37,86 @@ while (Serial.available()){
       brightness = data.toInt();
     }
   }
-  Serial.println(var);
+  Serial.println(mode);
   Serial.println(num_led);
   Serial.println(brightness);
+    /* static light*/
 
-  if (var == "0"){  /* off */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB(0, 0, 0);/* green, red, blue */
+  if (mode == "0"){  /* off */
+    Serial.println(mode);
+    while (mode == "0"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB(0, 0, 0);/* green, red, blue */
+        FastLED.show();
+      }
     }
   }
-  else if (var == "1"){ /* green */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB((2.5 * brightness), (0 * brightness), (0 * brightness));
+  else if (mode == "1"){ /* green */
+    while (mode == "1"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB((2.5 * brightness), (0 * brightness), (0 * brightness));
+        FastLED.show();
+      }
     }
   }
-  else if (var == "2"){ /* yellow */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB((2.5 * brightness), (2.5 * brightness), (0 * brightness));
+  else if (mode == "2"){ /* yellow */
+    while (mode == "2"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB((2.5 * brightness), (2.5 * brightness), (0 * brightness));
+        FastLED.show();
+      }
     }
   }
-  else if (var == "3"){ /* red */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB((0 * brightness), (2.5 * brightness), (0 * brightness));
+  else if (mode == "3"){ /* red */
+    while (mode == "3"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB((0 * brightness), (2.5 * brightness), (0 * brightness));
+        FastLED.show();
+      }
     }
   }
-  else if (var == "4"){ /* pink */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB((0 * brightness), (2.5 * brightness), (2.5 * brightness));
+  else if (mode == "4"){ /* pink */
+    while (mode == "4"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB((0 * brightness), (2.5 * brightness), (2.5 * brightness));
+        FastLED.show();
+      }
     }
   }
-  else if (var == "5"){ /* tortoise */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB((2.5 * brightness), (0 * brightness), (2.5 * brightness));
+  else if (mode == "5"){ /* tortoise */
+    while (mode == "5"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB((2.5 * brightness), (0 * brightness), (2.5 * brightness));
+        FastLED.show();
+      }
     }
   }
-  else if (var == "6"){ /* blue */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB((0 * brightness), (0 * brightness), (2.5 * brightness));
+  else if (mode == "6"){ /* blue */
+    while (mode == "6"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB((0 * brightness), (0 * brightness), (2.5 * brightness));
+        FastLED.show();
+      }
     }
   }
-  else if (var == "7"){ /* blue */
-    for (int i = 0; i < NUM_LEDS; i++) {
-      leds[i].setRGB((2.5 * brightness), (2.5 * brightness), (2.5 * brightness));
-    }
+  else if (mode == "7"){ /* white */
+    while (mode == "7"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i].setRGB((2.5 * brightness), (2.5 * brightness), (2.5 * brightness));
+        FastLED.show();
+      }
+    }                     /* light effects */
   }
-  FastLED.show();
-
+  else if (mode == "10"){ /* rainbow */
+    while (mode == "10"){
+      for (int j = 0; j < 255; j++) {
+        for (int i = 0; i < NUM_LEDS; i++) {
+          leds[i] = CHSV(i - (j * 2), brightness, 255); /* The higher the value 4 the less fade there is and vice versa */ 
+        }
+        FastLED.show();
+        delay(25); /* Change this to your hearts desire, the lower the value the faster your colors move (and vice versa) */
+        }
+     }
+    }
   }
 }
