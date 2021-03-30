@@ -21,9 +21,12 @@ void setup() {
 }
  
 void loop() {
+  Serial.println("1.dsdsa");
   if (Serial.available()){
+    Serial.println("2.dsdsa");
     for (int i = 0; i < 3; i++)
     {
+      Serial.println("3.dsdsa");
       data = Serial.read();
       if (i == 0)
       {
@@ -179,4 +182,50 @@ String modes(String mode){
          }
      }
     }
+  else if (mode == "11"){ /* rainbow */
+    while (mode == "11"){
+    for( int colorStep=0; colorStep<256; colorStep++ ) {
+  
+        int r = colorStep;  // Redness starts at zero and goes up to full
+        int b = 255-colorStep;  // Blue starts at full and goes down to zero
+        int g = colorStep -255;  // No green needed to go from blue to red
+  
+        for(int x = 0; x < NUM_LEDS; x++){
+            leds[x] = CRGB(r,g,b);
+        }
+        FastLED.show();
+        delay(10);
+      if (Serial.available() > 0){
+          loop();
+        }
+        else{
+          ;
+         }
+      }
+    }
   }
+  else if (mode == "12"){ /* rainbow */
+    while (mode == "12"){
+      for (int i = 0; i < NUM_LEDS; i++)
+      {
+        leds[i] = CRGB::Red;
+        FastLED.show();
+        delay(100);
+        leds[i] = CRGB::Black;
+      }
+      for (int i = NUM_LEDS - 1; i >= 0; i--)
+      {
+        leds[i] = CRGB::Red;
+        FastLED.show();
+        delay(100);
+        leds[i] = CRGB::Black;
+      }
+      if (Serial.available() > 0){
+          loop();
+        }
+        else{
+          ;
+         }
+    }
+  }
+}
