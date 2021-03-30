@@ -54,13 +54,14 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB(0, 0, 0);/* green, red, blue */
         FastLED.show();
-        if (Serial.available() > 0){
+        
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }
   }
   else if (mode == "1"){ /* green */
@@ -68,13 +69,13 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB((2.5 * brightness), (0 * brightness), (0 * brightness));
         FastLED.show();
-        if (Serial.available() > 0){
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }
   }
   else if (mode == "2"){ /* yellow */
@@ -82,13 +83,13 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB((2.5 * brightness), (2.5 * brightness), (0 * brightness));
         FastLED.show();
-        if (Serial.available() > 0){
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }
   }
   else if (mode == "3"){ /* red */
@@ -96,13 +97,13 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB((0 * brightness), (2.5 * brightness), (0 * brightness));
         FastLED.show();
-        if (Serial.available() > 0){
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }
   }
   else if (mode == "4"){ /* pink */
@@ -110,13 +111,13 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB((0 * brightness), (2.5 * brightness), (2.5 * brightness));
         FastLED.show();
-        if (Serial.available() > 0){
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }
   }
   else if (mode == "5"){ /* tortoise */
@@ -124,13 +125,13 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB((2.5 * brightness), (0 * brightness), (2.5 * brightness));
         FastLED.show();
-        if (Serial.available() > 0){
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }
   }
   else if (mode == "6"){ /* blue */
@@ -138,13 +139,13 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB((0 * brightness), (0 * brightness), (2.5 * brightness));
         FastLED.show();
-        if (Serial.available() > 0){
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }
   }
   else if (mode == "7"){ /* white */
@@ -152,13 +153,13 @@ String modes(String mode){
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i].setRGB((2.5 * brightness), (2.5 * brightness), (2.5 * brightness));
         FastLED.show();
-        if (Serial.available() > 0){
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-      }
+      else{
+        ;
+       }
     }                     /* light effects */
   }
   else if (mode == "10"){ /* rainbow */
@@ -175,7 +176,7 @@ String modes(String mode){
         }
         else{
           ;
-         }   
+         }
      }
     }
   }
