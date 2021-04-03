@@ -3,10 +3,13 @@ import time
 import tkinter as tk
 from tkinter import *
 
-brightness = 100
-num_led = 12
 WIDTH = 1920
 HEIGHT = 1080
+num_led = 12
+mode = 0
+green = 0
+red = 0
+blue = 0
 
 root = Tk()
 
@@ -74,15 +77,15 @@ def static_white():
 
 def rainbow_chase():
     brightness = brightness_slider.get()
-    data_to_arduino(mode=10, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
+    data_to_arduino(mode=2, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def fade():
     brightness = brightness_slider.get()
-    data_to_arduino(mode=11, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
+    data_to_arduino(mode=3, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def single_ball():
     brightness = brightness_slider.get()
-    data_to_arduino(mode=12, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
+    data_to_arduino(mode=4, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 
 def static_color():
@@ -92,7 +95,12 @@ def static_color():
     brightness_i = brightness_slider.get()
     data_to_arduino(mode=1, green=green_i, red=red_i, blue=blue_i, num_led=12, brightness=brightness_i)
 
-def brightness_controller(var):
+def brightness_controller(_):
+    current_mode = mode
+    current_green = green
+    currnet_red = red
+    current_blue = blue
+    print(_)
     data_to_arduino(mode=current_mode, green=current_green, red=currnet_red, blue=current_blue, num_led=num_led, brightness=brightness_slider.get())
 
 entry_green = Entry(root, width=3)
@@ -103,8 +111,9 @@ entry_blue = Entry(root, width=3)
 entry_blue.pack()
 
 
-brightness_slider = Scale(root, from_=0, to=100, orient=HORIZONTAL)
+brightness_slider = Scale(root, from_=0, to=100, length=400, orient=HORIZONTAL)
 brightness_slider.pack()
+brightness_slider. set(75)
 
 
 Static = tk.Button(root, text="Static", padx=10, pady=5, fg="white", bg="#263D42", command=static_color)
