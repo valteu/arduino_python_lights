@@ -117,8 +117,8 @@ label1.place(x=-1, y=-1)
 color_frame = tk.Frame(root, bg="#9e0025")
 color_frame.place(relwidth=0.6, relheight=0.3, relx=0.35, rely=0.6)
 
-color_frame_headline = tk.Label(color_frame, text="Color", height=1, width=int(WIDTH*0.6), padx=50, pady=2, bg="#9e0025", fg="#ffc800",  borderwidth=3)
-color_frame_headline.config(font=("Arial", 24), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red")
+color_frame_headline = tk.Label(color_frame, text="Color", height=1, width=int(WIDTH*0.6), padx=50, pady=2, bg="#9e0025", fg="white",  borderwidth=3)
+color_frame_headline.config(font=("Arial", 24), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red", fg="white")
 color_frame_headline.pack()
 
 entry_green = Entry(color_frame, width=3)
@@ -138,8 +138,8 @@ brightness_slider.place(relx=0.3, rely=0.6)
 
 brightness_slider. set(75)
 
-headline = tk.Label(root, text="Valteu lights", width=15, height=1, bg="#9e0025", fg="#ffc800",  borderwidth=3)
-headline.config(font=("Arial", 44, ), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red")
+headline = tk.Label(root, text="Valteu lights", width=15, height=1, bg="#9e0025",  borderwidth=3)
+headline.config(font=("Arial", 44), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red", fg="white")
 headline.pack()
 
 Static = tk.Button(color_frame, text="Static", width=5, height=3, fg="white", bg="#263D42", command=static_color)
@@ -162,7 +162,7 @@ StaticRed = tk.Button(color_frame, width=5, height=3, bg="red", command=static_r
 StaticRed.pack()
 StaticRed.place(relx=0.275, rely=0.3)
 
-StaticPink = tk.Button(color_frame, width=5, height=3, bg="pink", command=static_pink)
+StaticPink = tk.Button(color_frame, width=5, height=3, bg="#ff00ff", command=static_pink)
 StaticPink.pack()
 StaticPink.place(relx=0.35, rely=0.3)
 
