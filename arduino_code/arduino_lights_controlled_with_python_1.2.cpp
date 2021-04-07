@@ -13,6 +13,7 @@ bool gReverseDirection = false;
 #define NUM_LEDS 30      /* The amount of pixels/leds you have */
 #define DATA_PIN 3       /* The pin your data line is connected to */
 #define LED_TYPE WS2812B /* I assume you have WS2812B leds, if not just change it to whatever you have */
+#define COLOR_ORDER GRB
 #define COOLING  55
 #define SPARKING 120
 
@@ -23,7 +24,7 @@ void setup() {
   FastLED.clear();
   Serial.begin(9600); //initialize serial COM at 9600 baudrate
   pinMode(LED_BUILTIN, OUTPUT); //make the LED pin (13) as output
-  FastLED.addLeds<LED_TYPE, DATA_PIN, RGB>(leds, NUM_LEDS);
+  FastLED.addLeds<LED_TYPE, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
   Serial.println("Hi!, I am Arduino");
 }
  
