@@ -6,12 +6,15 @@ double blue;
 String num_led;
 int brightness;
 uint8_t gHue = 0; 
+bool gReverseDirection = false;
 
 #include <FastLED.h>
 
 #define NUM_LEDS 30      /* The amount of pixels/leds you have */
 #define DATA_PIN 3       /* The pin your data line is connected to */
 #define LED_TYPE WS2812B /* I assume you have WS2812B leds, if not just change it to whatever you have */
+#define COOLING  55
+#define SPARKING 120
 
 
 CRGB leds[NUM_LEDS];
@@ -204,6 +207,12 @@ String modes(String mode, double green, double red, double blue, int brightness)
         for (int i = 0; i < NUM_LEDS; i++) {
           fill_rainbow( leds, NUM_LEDS, gHue, 7);
           EVERY_N_MILLISECONDS( 20 ) { gHue++; }
+           if (Serial.available() > 0){
+            loop();
+            }
+            else{
+              ;
+             }
         }
         FastLED.show();
         delay(25); /* Change this to your hearts desire, the lower the value the faster your colors move (and vice versa) */
@@ -226,17 +235,52 @@ String modes(String mode, double green, double red, double blue, int brightness)
           for( int i = 0; i < 8; i++) {
             leds[beatsin16( i+7, 0, NUM_LEDS-1 )] |= CHSV(dothue, 200, 255);
             dothue += 32;
+            if (Serial.available() > 0){
+            loop();
+            }
+            else{
+              ;
+             }
           }
         }
         FastLED.show();
         delay(25); /* Change this to your hearts desire, the lower the value the faster your colors move (and vice versa) */
         }
-     if (Serial.available() > 0){
+     }
+  }
+  else if (mode == "8"){  /* off */
+    FastLED.clear();
+    Serial.println(mode);
+    while (mode == "8"){
+      static byte heat[NUM_LEDS];
+      for( int i = 0; i < NUM_LEDS; i++) {
+        heat[i] = qsub8( heat[i],  random8(0, ((COOLING * 10) / NUM_LEDS) + 2));
+      }
+      for( int k= NUM_LEDS - 1; k >= 2; k--) {
+      heat[k] = (heat[k - 1] + heat[k - 2] + heat[k - 2] ) / 3;
+      }
+      if( random8() < SPARKING ) {
+      int y = random8(7);
+      heat[y] = qadd8( heat[y], random8(160,255) );
+      }
+      for( int j = 0; j < NUM_LEDS; j++) {
+      CRGB color = HeatColor( heat[j]);
+      int pixelnumber;
+      if( gReverseDirection ) {
+        pixelnumber = (NUM_LEDS-1) - j;
+      } else {
+        pixelnumber = j;
+      }
+      leds[pixelnumber] = color;
+      FastLED.show();
+        
+      }
+      if (Serial.available() > 0){
           loop();
         }
-        else{
-          ;
-         }
-     }
+      else{
+        ;
+       }
+    }
   }
 }
