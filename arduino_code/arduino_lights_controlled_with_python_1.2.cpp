@@ -5,7 +5,7 @@ double red;
 double blue;
 String num_led;
 int brightness;
-uint8_t gHue = 0; 
+byte gHue; 
 bool gReverseDirection = false;
 
 #include <FastLED.h>
@@ -92,7 +92,7 @@ String modes(String mode, double green, double red, double blue, int brightness)
     FastLED.clear();
     while (mode == "1"){
       for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i].setRGB((green * brightness), (red * brightness), (blue * brightness));
+        leds[i].setRGB((red * brightness), (green * brightness), (blue * brightness));
         FastLED.show();
       }
       if (Serial.available() > 0){
@@ -226,7 +226,7 @@ String modes(String mode, double green, double red, double blue, int brightness)
          }
      }
   }
-  else if (mode == "7"){ /* rainbow */
+  else if (mode == "7"){ /* juggle */
     FastLED.clear();
     while (mode == "7"){
       for (int j = 0; j < 255; j++) {
@@ -275,6 +275,24 @@ String modes(String mode, double green, double red, double blue, int brightness)
       leds[pixelnumber] = color;
       FastLED.show();
         
+      }
+      if (Serial.available() > 0){
+          loop();
+        }
+      else{
+        ;
+       }
+    }
+  }
+  else if (mode == "9"){ /* green */
+    FastLED.clear();
+    while (mode == "9"){
+      for (int i = 0; i < NUM_LEDS; i++) {
+        fadeToBlackBy( leds, NUM_LEDS, 20);
+        int pos = beatsin16( 13, 0, NUM_LEDS-1 );
+        leds[pos] += CHSV( gHue, 255, 192);
+        Serial.println(gHue);
+        FastLED.show();
       }
       if (Serial.available() > 0){
           loop();
