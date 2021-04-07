@@ -107,9 +107,17 @@ def rainbow_fade_command():
     brightness = brightness_slider.get()
     data_to_arduino(mode=6, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
-def confetti():
+def juggle_command():
     brightness = brightness_slider.get()
     data_to_arduino(mode=7, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
+
+def fire_command():
+    brightness = brightness_slider.get()
+    data_to_arduino(mode=8, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
+
+def beat_command():
+    brightness = brightness_slider.get()
+    data_to_arduino(mode=9, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def custom_mode(green, red, blue, brightness):
     data_to_arduino(mode=1, green=green, red=red, blue=blue, num_led=num_led, brightness=brightness)
@@ -243,9 +251,17 @@ Rainbow_fade = tk.Button(color_frame, text="Rb Fade", width=5, height=3, fg="whi
 Rainbow_fade.pack()
 Rainbow_fade.place(relx=0.925, rely=0.3)
 
-Confetti = tk.Button(color_frame, text="Confetti", width=5, height=3, fg="white", bg="#263D42", command=confetti)
-Confetti.pack()
-Confetti.place(relx=0.925, rely=0.6)
+Juggle = tk.Button(color_frame, text="Juggle", width=5, height=3, fg="white", bg="#263D42", command=juggle_command)
+Juggle.pack()
+Juggle.place(relx=0.925, rely=0.6)
+
+FireButton = tk.Button(color_frame, text="Fire", width=5, height=3, fg="white", bg="#263D42", command=fire_command)
+FireButton.pack()
+FireButton.place(relx=0.875, rely=0.6)
+
+BeatButton = tk.Button(color_frame, text="Beat", width=5, height=3, fg="white", bg="#263D42", command=beat_command)
+BeatButton.pack()
+BeatButton.place(relx=0.8, rely=0.6)
 
 if custome_button_place_1 == False:
     create_custom_mode_1 = tk.Button(color_frame, text="custom", width=5, height=3, fg="white", bg="#263D42", command=custom_mode)
