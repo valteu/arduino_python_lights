@@ -77,73 +77,74 @@ def light_off():
     data_to_arduino(mode=0, green=0, red=0, blue=0, num_led=0, brightness=0)
 
 def static_green():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=255, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def static_yellow():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=255, red=255, blue=0, num_led=num_led, brightness=brightness)
 
 def static_red():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=0, red=255, blue=0, num_led=num_led, brightness=brightness)
 
 def static_pink():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=0, red=255, blue=255, num_led=num_led, brightness=brightness)
 
 def static_tortoise():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=255, red=0, blue=255, num_led=num_led, brightness=brightness)
 
 def static_blue():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=0, red=0, blue=255, num_led=num_led, brightness=brightness)
 
 def static_white():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=255, red=255, blue=255, num_led=num_led, brightness=brightness)
 
 def rainbow_chase():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=2, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def fade():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=3, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def single_ball():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=4, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def two_color_fade_command():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=5, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def rainbow_fade_command():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=6, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def juggle_command():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=7, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def fire_command():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=8, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def beat_command():
-    brightness = brightness_slider.get()
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=9, green=0, red=0, blue=0, num_led=num_led, brightness=brightness)
 
 def custom_mode(green, red, blue, brightness):
+    brightness = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=green, red=red, blue=blue, num_led=num_led, brightness=brightness)
 
 def save_custom_color(custom_color_number):
     custom_green = entry_green.get()
     custom_red = entry_red.get()
     custom_blue = entry_blue.get()
-    custom_brightness = custom_brightness_slider.get()
+    custom_brightness = int(custom_brightness_slider.get() * 0.9)
     custome_button_place_1 = True
     
     save_list_label = "custom_mode_save_list_" + str(custom_color_number)
@@ -158,7 +159,7 @@ def save_custom_color(custom_color_number):
     create_custom_mode_1 = tk.Button(color_frame, text="edit", width=1, height=1, fg="white", bg="#263D42", command=lambda: create_custom_color_window(custom_color_number=1))
     create_custom_mode_1.pack()
     create_custom_mode_1.place(relx=0.05, rely=0.6)
-    
+
     return custome_button_place_1
 
 def create_custom_color_window(custom_color_number):
@@ -175,7 +176,7 @@ def create_custom_color_window(custom_color_number):
     entry_blue.pack()
     entry_blue.place(relx=0.25, rely=0.25)
 
-    custom_brightness_slider = Scale(custom_window, from_=0, to=100, length=400, orient=HORIZONTAL)
+    custom_brightness_slider = Scale(custom_window, from_=1, to=100, length=400, orient=HORIZONTAL)
     custom_brightness_slider.pack()
     custom_brightness_slider.place(relx=0.3, rely=0.1)
     custom_brightness_slider. set(75)
@@ -192,7 +193,7 @@ def static_color():
     green_i = entry_green.get()
     red_i = entry_red.get()
     blue_i = entry_blue.get()
-    brightness_i = brightness_slider.get()
+    brightness_i = int(brightness_slider.get() * 0.9)
     data_to_arduino(mode=1, green=green_i, red=red_i, blue=blue_i, num_led=12, brightness=brightness_i)
 
 def brightness_controller(_):
@@ -200,7 +201,7 @@ def brightness_controller(_):
     current_green = green
     currnet_red = red
     current_blue = blue
-    data_to_arduino(mode=current_mode, green=current_green, red=currnet_red, blue=current_blue, num_led=num_led, brightness=brightness_slider.get())
+    data_to_arduino(mode=current_mode, green=current_green, red=currnet_red, blue=current_blue, num_led=num_led, brightness=int(brightness_slider.get() * 0.9))
 
 image1 = Image.open("//home//valteu//programming//lights//light_gui_images//background_gui.png")
 test = ImageTk.PhotoImage(image1)
@@ -218,9 +219,9 @@ color_frame_headline = tk.Label(color_frame, text="Color", height=1, width=int(W
 color_frame_headline.config(font=("Arial", 24), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red", fg="white")
 color_frame_headline.pack()
 
-brightness_slider = Scale(color_frame, from_=0, to=100, length=400, orient=HORIZONTAL)
+brightness_slider = Scale(color_frame, from_=1, to=100, length=400, orient=HORIZONTAL)
 brightness_slider.pack()
-brightness_slider.place(relx=0.6, rely=0.5)
+brightness_slider.place(relx=0.3, rely=0.8)
 brightness_slider. set(75)
 
 headline = tk.Label(root, text="Valteu lights", width=15, height=1, bg="#9e0025",  borderwidth=3)
