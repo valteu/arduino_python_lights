@@ -1,9 +1,12 @@
 import serial
 import time
 import os
+import os.path
+from os import path
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
+import pickle
 
 WIDTH = 1920
 HEIGHT = 1080
@@ -21,6 +24,20 @@ custome_button_place_6 = False
 custome_button_place_7 = False
 custome_button_place_8 = False
 
+os.system("clear")
+
+if path.exists("valteu_lights_gui_saves.dat") == True:
+    saved_data = pickle.load(open("valteu_lights_gui_saves.dat", "rb"))
+    print(saved_data)
+    custom_green = saved_data[0]
+    custom_red = saved_data[1]
+    custom_blue = saved_data[2]
+    custom_brightness = saved_data[3]
+    custome_button_place_1 = saved_data[4]
+
+else:
+    first_entry = [0]
+    pickle.dump(first_entry, open("valteu_lights_gui_saves.dat", "wb"))
 
 root = Tk()
 
@@ -122,18 +139,29 @@ def beat_command():
 def custom_mode(green, red, blue, brightness):
     data_to_arduino(mode=1, green=green, red=red, blue=blue, num_led=num_led, brightness=brightness)
 
-def save_custom_color():
+def save_custom_color(custom_color_number):
     custom_green = entry_green.get()
     custom_red = entry_red.get()
     custom_blue = entry_blue.get()
     custom_brightness = custom_brightness_slider.get()
     custome_button_place_1 = True
+    
+    save_list_label = "custom_mode_save_list_" + str(custom_color_number)
+    save_list = [custom_green, custom_red, custom_blue, custom_brightness, custome_button_place_1]
+    print(type(save_list))
+    pickle.dump(save_list, open("valteu_lights_gui_saves.dat", "wb"))
+
     custom_mode_button_1 = tk.Button(color_frame, text="custom", width=5, height=3, bg="white", command=lambda: custom_mode(green=custom_green, red=custom_red, blue=custom_blue, brightness=custom_brightness))
     custom_mode_button_1.pack()
     custom_mode_button_1.place(relx=0.05, rely=0.6)
+
+    create_custom_mode_1 = tk.Button(color_frame, text="edit", width=1, height=1, fg="white", bg="#263D42", command=lambda: create_custom_color_window(custom_color_number=1))
+    create_custom_mode_1.pack()
+    create_custom_mode_1.place(relx=0.05, rely=0.6)
+    
     return custome_button_place_1
 
-def create_custom_color_window():
+def create_custom_color_window(custom_color_number):
     global entry_green, entry_red, entry_blue, custom_brightness_slider
 
     custom_window = tk.Toplevel(color_frame, width=int(WIDTH/3), height=int(HEIGHT/3))
@@ -152,11 +180,11 @@ def create_custom_color_window():
     custom_brightness_slider.place(relx=0.3, rely=0.1)
     custom_brightness_slider. set(75)
 
-    Static_color = tk.Button(custom_window, text="Color", width=5, height=3, fg="white", bg="#263D42", command=static_color)
+    Static_color = tk.Button(custom_window, text="Preview", width=5, height=3, fg="white", bg="#263D42", command=static_color)
     Static_color.pack()
     Static_color.place(relx=0.05, rely=0.1)
 
-    Save_color = tk.Button(custom_window, text="Save", width=5, height=3, fg="white", bg="#263D42",command=save_custom_color)
+    Save_color = tk.Button(custom_window, text="Save", width=5, height=3, fg="white", bg="#263D42",command=lambda: save_custom_color(custom_color_number))
     Save_color.pack()
     Save_color.place(relx=0.85, rely=0.8)
 
@@ -264,9 +292,16 @@ BeatButton.pack()
 BeatButton.place(relx=0.8, rely=0.6)
 
 if custome_button_place_1 == False:
-    create_custom_mode_1 = tk.Button(color_frame, text="custom", width=5, height=3, fg="white", bg="#263D42", command=custom_mode)
+    create_custom_mode_1 = tk.Button(color_frame, text="custom", width=5, height=3, fg="white", bg="#263D42", command=lambda: create_custom_color_window(custom_color_number=1))
     create_custom_mode_1.pack()
     create_custom_mode_1.place(relx=0.05, rely=0.6)
+else:
+    custom_mode_button_1 = tk.Button(color_frame, text="custom", width=5, height=3, bg="white", command=lambda: custom_mode(green=custom_green, red=custom_red, blue=custom_blue, brightness=custom_brightness))
+    custom_mode_button_1.pack()
+    custom_mode_button_1.place(relx=0.05, rely=0.6)
 
+    create_custom_mode_1 = tk.Button(color_frame, text="edit", width=1, height=1, fg="white", bg="#263D42", command=lambda: create_custom_color_window(custom_color_number=1))
+    create_custom_mode_1.pack()
+    create_custom_mode_1.place(relx=0.05, rely=0.6)
 
 root.mainloop()
