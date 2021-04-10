@@ -403,6 +403,13 @@ label1.image = test
 
 label1.place(x=-1, y=-1)
 
+profile_frame = tk.Frame(root, bg="#9e0025")
+profile_frame.place(relwidth=0.25, relheight=0.7, relx=0.05, rely=0.2)
+
+profile_frame_headline = tk.Label(profile_frame, text="Profiles", height=1, width=int(WIDTH*0.3), padx=55, pady=2, bg="#9e0025", fg="white",  borderwidth=3)
+profile_frame_headline.config(font=("Arial", 24), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red", fg="white")
+profile_frame_headline.pack()
+
 color_frame = tk.Frame(root, bg="#9e0025")
 color_frame.place(relwidth=0.6, relheight=0.3, relx=0.35, rely=0.6)
 
@@ -418,6 +425,14 @@ brightness_slider. set(75)
 headline = tk.Label(root, text="Valteu lights", width=15, height=1, bg="#9e0025",  borderwidth=3)
 headline.config(font=("Arial", 44), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red", fg="white")
 headline.pack()
+headline.place(relx=0.36, rely=0.05)
+
+device_frame = tk.Frame(root, bg="#9e0025")
+device_frame.place(relwidth=0.6, relheight=0.39, relx=0.35, rely=0.2)
+
+device_frame_headline = tk.Label(device_frame, text="Devices", height=1, width=int(WIDTH*0.6), padx=50, pady=2, bg="#9e0025", fg="white",  borderwidth=3)
+device_frame_headline.config(font=("Arial", 24), state=DISABLED, anchor=CENTER, highlightbackground = "red", highlightcolor= "red", fg="white")
+device_frame_headline.pack()
 
 Off = tk.Button(color_frame, width=5, height=3, bg="grey", command=light_off)
 Off.pack()
