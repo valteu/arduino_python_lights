@@ -27,7 +27,7 @@ custom_button_place_9 = False
 
 device_button_place_1 = False
 
-# save_list = [[0] , [0], [0], [0], [0], [0], [0], [0], [0]]
+save_list = [[0] , [0], [0], [0], [0], [0], [0], [0], [0]]
 
 os.system("clear")
 
@@ -108,13 +108,14 @@ if path.exists("valteu_lights_gui_saves.dat") == True:
         custom_button_place_9 = ninth_row[4]
 
     if len(saved_data) > 9:
-        devices = saved_data[9]
-        if len(devices[0]) > 1:
-            device_button_place_1 = True
+        device_row = saved_data[9]
+        # if len(device_row[0]) > 1:
+            # device_button_place_1 = True
+            # device_1 = device_row[0]
 
-# else:
-#     first_entry = [0][1]
-#     pickle.dump(first_entry, open("valteu_lights_gui_saves.dat", "wb"))
+else:
+    first_entry = [[0], [0], [0], [0], [0], [0], [0], [0], [0], [0]] 
+    pickle.dump(first_entry, open("valteu_lights_gui_saves.dat", "wb"))
 
 root = Tk()
 
@@ -130,7 +131,8 @@ print(ArduinoSerial.readline())
 
 def data_to_arduino(mode, green, red, blue, num_led, brightness):
     x = 1
-    current_strip =  entry_device_number.get()
+    current_strip = saved_data[9]
+    print(current_strip)
     while x == 1:
         data[0] = int(mode)
         data[1] = int(green)
@@ -418,14 +420,16 @@ def add_device():
     Save_device.place(relx=0.85, rely=0.8)
 
 def save_device():
+    device_1_exists = True
     device_num = entry_device_number.get()
     device_led_len = entry_device_len_led.get()
-    device = [[device_num, device_led_len]]
-    if len(saved_data) < 10:
-        saved_data.append(device)
-    else:
-        saved_data[9] = device
-    print(saved_data)
+    device = [[device_num, device_led_len, device_1_exists]]
+    if not saved_data:
+        if len(saved_data) < 10:
+            saved_data.append(device)
+        else:
+            saved_data[9] = device
+        print(saved_data)
 
     device_button_place_1 = True
     pickle.dump(saved_data, open("valteu_lights_gui_saves.dat", "wb"))
@@ -438,13 +442,25 @@ def edit_device():
     entry_device_number.pack()
     entry_device_number.place(relx=0.25, rely=0.1)
 
-
-
-
 def current_device(num_device):
     current_num_led = saved_data[9][num_device -1][1]
     current_num_led_strip = saved_data[9][num_device -1]
     return current_num_led, current_num_led_strip
+
+def choose_device():
+    global entry_device_number, entry_device_len_led
+    choose_device_window = tk.Toplevel(device_frame, width=int(WIDTH/3), height=int(HEIGHT/3))
+    entry_device_number = Entry(choose_device_window, width=3)
+    entry_device_number.pack()
+    entry_device_number.place(relx=0.25, rely=0.1)
+    Save_device = tk.Button(choose_device_window, text="Save", width=5, height=3, fg="white", bg="#263D42",command=save_chosen_device)
+    Save_device.pack()
+    Save_device.place(relx=0.85, rely=0.8)
+
+
+def save_chosen_device():
+    saved_data[9] = entry_device_number.get()
+    pickle.dump(saved_data, open("valteu_lights_gui_saves.dat", "wb"))
 
 image1 = Image.open("//home//valteu//programming//lights//light_gui_images//background_gui.png")
 test = ImageTk.PhotoImage(image1)
@@ -667,18 +683,18 @@ else:
     edit_custom_mode_9.pack()
     edit_custom_mode_9.place(relx=0.65, rely=0.6)
 
-if device_button_place_1 == False:
-    AddDevice_1 = tk.Button(device_frame, text="Add", width=5, height=1, bg="gold", fg="black", command=add_device)
-    AddDevice_1.pack()
-    AddDevice_1.place(relx=0.0125, rely=0.15)
-else:
-    Device_1 = tk.Button(device_frame, text="Device 1", width=5, height=3, bg="white", command=lambda: current_device(num_device=1))
-    Device_1.pack()
-    Device_1.place(relx=0.0125, rely=0.15)
+# if device_button_place_1 == False:
+AddDevice_1 = tk.Button(device_frame, text="Add", width=5, height=1, bg="gold", fg="black", command=choose_device)
+AddDevice_1.pack()
+AddDevice_1.place(relx=0.0125, rely=0.15)
+# else:
+#     Device_1 = tk.Button(device_frame, text="Device 1", width=5, height=3, bg="white", command=lambda: current_device(num_device=1))
+#     Device_1.pack()
+#     Device_1.place(relx=0.0125, rely=0.15)
 
-    edit_device_1 = tk.Button(device_frame, text="edit", width=1, height=1, fg="white", bg="#263D42", command=edit_device)
-    edit_device_1.pack()
-    edit_device_1.place(relx=0.0125, rely=0.15)
+#     edit_device_1 = tk.Button(device_frame, text="edit", width=1, height=1, fg="white", bg="#263D42", command=edit_device)
+#     edit_device_1.pack()
+#     edit_device_1.place(relx=0.0125, rely=0.15)
 
 
 root.mainloop()
