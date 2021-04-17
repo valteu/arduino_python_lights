@@ -2,14 +2,15 @@
 
 String data;
 String mode;
-int current_strip;
+int current_strip = 100;
 double green;
 double red;
 double blue;
 int brightness;
+
  
 // Pattern types supported:
-enum  pattern { NONE, RAINBOW_CYCLE, THEATER_CHASE, COLOR_WIPE, SCANNER, FADE };
+enum  pattern { NONE, RAINBOW_CYCLE, THEATER_CHASE, COLOR_WIPE, SCANNER, FADE , COMPASS, DOUBLESCANNER, FOLLOWER, HALFUPDOWN, TWINKLE, RUNNING, RUNNINGRAINBOW, OFF, STATIC };
 // Patern directions supported:
 enum  direction { FORWARD, REVERSE };
  
@@ -60,6 +61,12 @@ class NeoPatterns : public Adafruit_NeoPixel
                     break;
                 case FADE:
                     FadeUpdate();
+                    break;
+                case OFF:  // Custom animation for candle
+                    OffUpdate(); 
+                    break;
+                case STATIC:  // Custom animation for candle
+                    StaticUpdate(); 
                     break;
                 default:
                     break;
@@ -238,7 +245,43 @@ class NeoPatterns : public Adafruit_NeoPixel
         show();
         Increment();
     }
-   
+    void Off(uint32_t color1, uint32_t color2, uint16_t steps, uint8_t interval, direction dir = FORWARD)
+    {
+      ActivePattern = OFF;
+      Interval = interval;
+      TotalSteps = steps;
+      Index = 0;
+      Direction = dir;
+    }
+    
+    // Initialize for a OFF
+    void OffUpdate()
+    {
+
+      ColorSet(Color(0, 0, 0));
+      show();
+      Increment();
+    }
+    void Static(uint32_t color1, uint32_t color2, uint16_t steps, uint8_t interval, direction dir = FORWARD)
+    {
+      ActivePattern = OFF;
+      Interval = interval;
+      TotalSteps = numPixels();
+      Index = 0;
+      Direction = dir;
+    }
+    
+    // Initialize for a OFF
+    void StaticUpdate()
+    {
+
+      for (int i = 0; i < numPixels(); i++)
+        {
+          ColorSet(Color(red, green, blue));
+        }
+        show();
+        Increment();
+    }
     // Calculate 50% dimmed version of a color (used by ScannerUpdate)
     uint32_t DimColor(uint32_t color)
     {
@@ -337,89 +380,120 @@ void loop()
   }
   if (current_strip == 0)
     {
-      if (mode == "1"){
-        Strip1.ActivePattern = RAINBOW_CYCLE;
-        Strip1.TotalSteps = 255;
-        Strip1.Interval = min(10, Strip3.Interval);
+      if (mode == "0")
+      {
+        Strip1.ActivePattern = OFF;
+      }
+      else if (mode == "1"){
+        Strip1.ActivePattern = STATIC;
+        Strip1.TotalSteps = Strip1.numPixels();
         }
       else if (mode == "2"){
+        Strip1.ActivePattern = RAINBOW_CYCLE;
+        Strip1.TotalSteps = 255;
+        Strip1.Interval = min(10, Strip1.Interval);
+        }
+      else if (mode == "3"){
         Strip1.ActivePattern = THEATER_CHASE;
         Strip1.Interval = 100;
         }
-      else if (mode == "3"){
-        Strip1.ActivePattern = COLOR_WIPE;
-        Strip1.TotalSteps = Strip3.numPixels();
-        }
       else if (mode == "4"){
-        Strip1.ActivePattern = SCANNER;
+        Strip1.ActivePattern = COLOR_WIPE;
+        Strip1.TotalSteps = Strip1.numPixels();
         }
       else if (mode == "5"){
+        Strip1.ActivePattern = SCANNER;
+        }
+      else if (mode == "6"){
         Strip1.ActivePattern = FADE;
         Strip1.Interval = 20;
         }
-      Strip1.Interval = 100;
+      else if (mode == "7"){
+          ;
+        }
       Strip1.show();
     }
     else if (current_strip == 1)
     {
-      if (mode == "1"){
-        Strip2.ActivePattern = RAINBOW_CYCLE;
-        Strip2.TotalSteps = 255;
-        Strip2.Interval = min(10, Strip3.Interval);
+      if (mode == "0")
+      {
+        Strip2.ActivePattern = OFF;;
+      }
+      else if (mode == "1"){
+        Strip2.ActivePattern = STATIC;
+        Strip2.TotalSteps = Strip1.numPixels();
         }
       else if (mode == "2"){
+        Strip2.ActivePattern = RAINBOW_CYCLE;
+        Strip2.TotalSteps = 255;
+        Strip2.Interval = min(10, Strip2.Interval);
+        }
+      else if (mode == "3"){
         Strip2.ActivePattern = THEATER_CHASE;
         Strip2.Interval = 100;
         }
-      else if (mode == "3"){
-        Strip2.ActivePattern = COLOR_WIPE;
-        Strip2.TotalSteps = Strip3.numPixels();
-        }
       else if (mode == "4"){
-        Strip2.ActivePattern = SCANNER;
+        Strip2.ActivePattern = COLOR_WIPE;
+        Strip2.TotalSteps = Strip2.numPixels();
         }
       else if (mode == "5"){
+        Strip2.ActivePattern = SCANNER;
+        }
+      else if (mode == "6"){
         Strip2.ActivePattern = FADE;
         Strip2.Interval = 20;
         }
-      Strip2.TotalSteps = 255;
-      Strip2.Interval = min(10, Strip3.Interval);
+      else if (mode == "7"){
+          ;
+        }
       Strip2.show();
     }
     else if (current_strip == 2)
     {
-      if (mode == "1"){
+      if (mode == "0")
+      {
+        Strip3.ActivePattern = OFF;
+      }
+      else if (mode == "1"){
+        Strip3.ActivePattern = STATIC;
+        Strip3.TotalSteps = Strip1.numPixels();
+        }
+      else if (mode == "2"){
         Strip3.ActivePattern = RAINBOW_CYCLE;
         Strip3.TotalSteps = 255;
         Strip3.Interval = min(10, Strip3.Interval);
         }
-      else if (mode == "2"){
+      else if (mode == "3"){
         Strip3.ActivePattern = THEATER_CHASE;
         Strip3.Interval = 100;
         }
-      else if (mode == "3"){
+      else if (mode == "4"){
         Strip3.ActivePattern = COLOR_WIPE;
         Strip3.TotalSteps = Strip3.numPixels();
         }
-      else if (mode == "4"){
+      else if (mode == "5"){
         Strip3.ActivePattern = SCANNER;
         }
-      else if (mode == "5"){
+      else if (mode == "6"){
         Strip3.ActivePattern = FADE;
         Strip3.Interval = 20;
         }
-      Strip3.TotalSteps = 255;
-      Strip3.Interval = min(10, Strip3.Interval);
+      else if (mode == "7"){
+        ;
+        }
       Strip3.show();
     }
   else // Back to normal operation
   {
     // Restore all pattern parameters to normal values
-    Strip1.ActivePattern = THEATER_CHASE;
-    Strip1.Interval = 100;
+    Strip3.ActivePattern = THEATER_CHASE;
+    Strip3.Interval = 100;
     Strip2.ActivePattern = RAINBOW_CYCLE;
     Strip2.TotalSteps = 255;
     Strip2.Interval = min(10, Strip3.Interval);
+    Strip1.ActivePattern = OFF;
+    Strip1.Interval = 200;
+    Serial.println(Strip1.ActivePattern);
   }
 }
  
