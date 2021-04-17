@@ -62,7 +62,7 @@ class NeoPatterns : public Adafruit_NeoPixel
                 case FADE:
                     FadeUpdate();
                     break;
-                case OFF:  // Custom animation for candle
+                case OFF:
                     OffUpdate(); 
                     break;
                 case STATIC:  // Custom animation for candle
@@ -262,7 +262,7 @@ class NeoPatterns : public Adafruit_NeoPixel
       show();
       Increment();
     }
-    void Static(uint32_t color1, uint32_t color2, uint16_t steps, uint8_t interval, direction dir = FORWARD)
+    void Static(uint16_t steps, uint8_t interval, direction dir = FORWARD)
     {
       ActivePattern = OFF;
       Interval = interval;
