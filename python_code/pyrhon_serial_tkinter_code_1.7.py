@@ -121,7 +121,7 @@ root = Tk()
 
 root.geometry(str(WIDTH) + 'x' + str(HEIGHT))
 
-ArduinoSerial = serial.Serial('/dev/ttyUSB0',9600)
+ArduinoSerial = serial.Serial('/dev/ttyUSB0',9600, timeout=1)
 print(ArduinoSerial.name)
 time.sleep(2)
 
@@ -131,7 +131,7 @@ print(ArduinoSerial.readline())
 
 def data_to_arduino(mode, green, red, blue, num_led, brightness):
     x = 1
-    current_strip = saved_data[9]
+    current_strip = str(saved_data[9][0][0])
     print(current_strip)
     while x == 1:
         data[0] = int(mode)
@@ -420,10 +420,9 @@ def add_device():
     Save_device.place(relx=0.85, rely=0.8)
 
 def save_device():
-    device_1_exists = True
     device_num = entry_device_number.get()
     device_led_len = entry_device_len_led.get()
-    device = [[device_num, device_led_len, device_1_exists]]
+    device = [[device_num, device_led_len]]
     if not saved_data:
         if len(saved_data) < 10:
             saved_data.append(device)
@@ -462,6 +461,44 @@ def save_chosen_device():
     saved_data[9] = entry_device_number.get()
     pickle.dump(saved_data, open("valteu_lights_gui_saves.dat", "wb"))
 
+def select_device():
+    devicename = device_listbox.get(ANCHOR)
+    if device_list[0] == devicename:
+        device_num = 0
+        device_led_len = 12
+        device = [[device_num, device_led_len]]
+        if len(saved_data) < 10:
+            saved_data.append(device)
+        else:
+            saved_data[9] = device
+        print(device)
+        pickle.dump(saved_data, open("valteu_lights_gui_saves.dat", "wb"))
+    elif device_list[1] == devicename:
+        device_2_exists = True
+        device_num = 1
+        device_led_len = 12
+        device = [[device_num, device_led_len]]
+        if len(saved_data) < 10:
+            saved_data.append(device)
+        else:
+            saved_data[9] = device
+        print(device)
+        pickle.dump(saved_data, open("valteu_lights_gui_saves.dat", "wb"))
+    elif device_list[2] == devicename:
+        device_3_exists = True
+        device_num = 2
+        device_led_len = 12
+        device = [[device_num, device_led_len]]
+        if len(saved_data) < 10:
+            saved_data.append(device)
+        else:
+            saved_data[9] = device
+        print(device)
+        pickle.dump(saved_data, open("valteu_lights_gui_saves.dat", "wb"))
+
+    pickle.dump(saved_data, open("valteu_lights_gui_saves.dat", "wb"))
+
+
 image1 = Image.open("//home//valteu//programming//lights//light_gui_images//background_gui.png")
 test = ImageTk.PhotoImage(image1)
 
@@ -497,6 +534,17 @@ headline.place(relx=0.36, rely=0.05)
 
 device_frame = tk.Frame(root, bg="#9e0025")
 device_frame.place(relwidth=0.6, relheight=0.39, relx=0.35, rely=0.2)
+
+device_listbox = Listbox(device_frame)
+device_listbox.pack(pady = 0.4)
+
+device_list = ["Device 1", "Device 2", "Device 3"]
+for item in device_list:
+    device_listbox.insert(END, item)
+
+SelectDevice = tk.Button(device_frame, text="Select", width=5, height=1, bg="gold", fg="black", command=select_device)
+SelectDevice.pack()
+SelectDevice.place(relx=0.5, rely=0.15)
 
 AddDevice_1 = tk.Button(device_frame, text="Add", width=5, height=1, bg="gold", fg="black", command=add_device)
 AddDevice_1.pack()
