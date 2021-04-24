@@ -413,22 +413,37 @@ void setup()
   {
     delay(10);
     EEPROM.get(0, Strip1mode);
+    delay(10);
     EEPROM.get(1, Strip1green);
+    delay(10);
     EEPROM.get(2, Strip1red);
+    delay(10);
     EEPROM.get(3, Strip1blue);
+    delay(10);
     EEPROM.get(4, Strip1brightness);
+    delay(10);
     
-    EEPROM.get(8, Strip1mode);
+    EEPROM.get(8, Strip2mode);
+    delay(10);
     EEPROM.get(9, Strip2green);
+    delay(10);
     EEPROM.get(10, Strip2red);
+    delay(10);
     EEPROM.get(11, Strip2blue);
+    delay(10);
     EEPROM.get(12, Strip2brightness);
+    delay(10);
 
     EEPROM.get(16, Strip3mode);
+    delay(10);
     EEPROM.get(17, Strip3green);
+    delay(10);
     EEPROM.get(18, Strip3red);
+    delay(10);
     EEPROM.get(19, Strip3blue);
+    delay(10);
     EEPROM.get(20, Strip3brightness);
+    delay(10);
 
     Serial.println("data1:");
     Serial.println(Strip1mode);
@@ -437,7 +452,7 @@ void setup()
     Serial.println(Strip1blue);
     Serial.println(Strip1brightness);
 
-    Serial.println("data1:");
+    Serial.println("data2:");
     Serial.println(Strip2mode);
     Serial.println(Strip2green);
     Serial.println(Strip2red);
@@ -464,42 +479,60 @@ void loop()
     achievedata();
     if (current_strip == 0)
     {
+      Serial.println("Strip 1 write:");
       Strip1mode = mode;
       Strip1green = green;
       Strip1red = red;
       Strip1blue = blue;
       Strip1brightness = brightness;
-      EEPROM.write(0, mode);
-      EEPROM.write(1, green);
-      EEPROM.write(2, red);
-      EEPROM.write(3, blue);
-      EEPROM.write(4, brightness);
+      EEPROM.write(0, Strip1mode);
+      delay(10);
+      EEPROM.write(1, Strip1green);
+      delay(10);
+      EEPROM.write(2, Strip1red);
+      delay(10);
+      EEPROM.write(3, Strip1blue);
+      delay(10);
+      EEPROM.write(4, Strip1brightness);
     }
     else if (current_strip == 1)
     {
+      Serial.println("Strip 3 write:");
       Strip2mode = mode;
       Strip2green = green;
       Strip2red = red;
       Strip2blue = blue;
       Strip2brightness = brightness;
-      EEPROM.write(8, mode);
-      EEPROM.write(9, green);
-      EEPROM.write(10, red);
-      EEPROM.write(11, blue);
-      EEPROM.write(12, brightness);
+      EEPROM.write(8, Strip2mode);
+      delay(10);
+      EEPROM.write(9, Strip2green);
+      delay(10);
+      EEPROM.write(10, Strip2red);
+      delay(10);
+      EEPROM.write(11, Strip2blue);
+      delay(10);
+      EEPROM.write(12, Strip2brightness);
     }
     else if (current_strip == 2)
     {
+      Serial.println("Strip 3 write:");
       Strip3mode = mode;
       Strip3green = green;
       Strip3red = red;
       Strip3blue = blue;
       Strip3brightness = brightness;
-      EEPROM.write(16, mode);
-      EEPROM.write(17, green);
-      EEPROM.write(18, red);
-      EEPROM.write(19, blue);
-      EEPROM.write(20, brightness);
+      EEPROM.write(16, Strip3mode);
+      delay(10);
+      EEPROM.write(17, Strip3green);
+      Serial.println(Strip3green);
+      delay(10);
+      EEPROM.write(18, Strip3red);
+      Serial.println(Strip3red);
+      delay(10);
+      EEPROM.write(19, Strip3blue);
+      Serial.println(Strip3blue);
+      delay(10);
+      EEPROM.write(20, Strip3brightness);
     }
   }
   if (current_strip == 0)
@@ -698,12 +731,6 @@ void loop()
       Strip3.show();
   }
 }
- 
-//------------------------------------------------------------
-//Completion Routines - get called on completion of a pattern
-//------------------------------------------------------------
- 
-// Strip2 Completion Callback
 void Strip2Complete()
 {
     ;
