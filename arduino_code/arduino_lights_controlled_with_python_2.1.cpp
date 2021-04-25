@@ -2,30 +2,30 @@
 #include <EEPROM.h>
 
 String data;
-int mode;
-int current_strip = 100;
-int green;
-int red;
-int blue;
-int brightness;
+byte mode;
+byte current_strip = 100;
+byte green;
+byte red;
+byte blue;
+byte brightness;
 
-int Strip1mode;
-int Strip1green;
-int Strip1red;
-int Strip1blue;
-int Strip1brightness;
+byte Strip1mode;
+byte Strip1green;
+byte Strip1red;
+byte Strip1blue;
+byte Strip1brightness;
 
-int Strip2mode;
-int Strip2green;
-int Strip2red;
-int Strip2blue;
-int Strip2brightness;
+byte Strip2mode;
+byte Strip2green;
+byte Strip2red;
+byte Strip2blue;
+byte Strip2brightness;
 
-int Strip3mode;
-int Strip3green;
-int Strip3red;
-int Strip3blue;
-int Strip3brightness;
+byte Strip3mode;
+byte Strip3green;
+byte Strip3red;
+byte Strip3blue;
+byte Strip3brightness;
 
  
 // Pattern types supported:
@@ -728,7 +728,7 @@ void loop()
       Strip3.ActivePattern = FADE;
       Strip3.Interval = 20;
       }
-      Strip3.show();
+    Strip3.show();
   }
 }
 void Strip2Complete()
