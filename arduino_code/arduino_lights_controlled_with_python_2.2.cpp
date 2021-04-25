@@ -643,17 +643,23 @@ void loop()
       else if (mode == 3){
         Strip1.ActivePattern = THEATER_CHASE;
         Strip1.Interval = 100;
+        Strip1.Color1 = rgb_touint32Color(Strip1primary_red, Strip1primary_green, Strip1primary_blue);
+        Strip1.Color2 = rgb_touint32Color(Strip1secundary_red, Strip1secundary_green, Strip1secundary_blue);
         }
       else if (mode == 4){
         Strip1.ActivePattern = COLOR_WIPE;
         Strip1.TotalSteps = Strip1.numPixels();
+        Strip1.Color1 = rgb_touint32Color(Strip1primary_red, Strip1primary_green, Strip1primary_blue);
         }
       else if (mode == 5){
         Strip1.ActivePattern = SCANNER;
+        Strip1.Color1 = rgb_touint32Color(Strip1primary_red, Strip1primary_green, Strip1primary_blue);
         }
       else if (mode == 6){
         Strip1.ActivePattern = FADE;
-        Strip1.Interval = 20;
+        Strip1.Interval = 100;
+        Strip1.Color1 = rgb_touint32Color(Strip1primary_red, Strip1primary_green, Strip1primary_blue);
+        Strip1.Color2 = rgb_touint32Color(Strip1secundary_red, Strip1secundary_green, Strip1secundary_blue);
         }
       else if (mode == 7){
           ;
@@ -679,17 +685,23 @@ void loop()
       else if (mode == 3){
         Strip2.ActivePattern = THEATER_CHASE;
         Strip2.Interval = 100;
+        Strip2.Color1 = rgb_touint32Color(Strip2primary_red, Strip2primary_green, Strip2primary_blue);
+        Strip2.Color2 = rgb_touint32Color(Strip2secundary_red, Strip2secundary_green, Strip2secundary_blue);
         }
       else if (mode == 4){
         Strip2.ActivePattern = COLOR_WIPE;
         Strip2.TotalSteps = Strip2.numPixels();
+        Strip2.Color1 = rgb_touint32Color(Strip2primary_red, Strip2primary_green, Strip2primary_blue);
         }
       else if (mode == 5){
         Strip2.ActivePattern = SCANNER;
+        Strip2.Color1 = rgb_touint32Color(Strip2primary_red, Strip2primary_green, Strip2primary_blue);
         }
       else if (mode == 6){
         Strip2.ActivePattern = FADE;
-        Strip2.Interval = 20;
+        Strip2.Interval = 100;
+        Strip2.Color1 = rgb_touint32Color(Strip2primary_red, Strip2primary_green, Strip2primary_blue);
+        Strip2.Color2 = rgb_touint32Color(Strip2secundary_red, Strip2secundary_green, Strip2secundary_blue);
         }
       else if (mode == 7){
           ;
@@ -715,17 +727,23 @@ void loop()
       else if (mode == 3){
         Strip3.ActivePattern = THEATER_CHASE;
         Strip3.Interval = 100;
+        Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
+        Strip3.Color2 = rgb_touint32Color(Strip3secundary_red, Strip3secundary_green, Strip3secundary_blue);
         }
       else if (mode == 4){
         Strip3.ActivePattern = COLOR_WIPE;
         Strip3.TotalSteps = Strip3.numPixels();
+        Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
         }
       else if (mode == 5){
         Strip3.ActivePattern = SCANNER;
+        Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
         }
       else if (mode == 6){
         Strip3.ActivePattern = FADE;
-        Strip3.Interval = 20;
+        Strip3.Interval = 100;
+        Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
+        Strip3.Color2 = rgb_touint32Color(Strip3secundary_red, Strip3secundary_green, Strip3secundary_blue);
         }
       else if (mode == 7){
         ;
@@ -757,14 +775,17 @@ void loop()
     else if (Strip1mode == 4){
       Strip1.ActivePattern = COLOR_WIPE;
       Strip1.TotalSteps = Strip3.numPixels();
+      Strip1.Color1 = rgb_touint32Color(Strip1primary_red, Strip1primary_green, Strip1primary_blue);
       }
     else if (Strip1mode == 5){
       Strip1.ActivePattern = SCANNER;
+      Strip1.Color1 = rgb_touint32Color(Strip1primary_red, Strip1primary_green, Strip1primary_blue);
       }
     else if (Strip1mode == 6){
       Strip1.ActivePattern = FADE;
-      Strip1.Interval = 20;
-      Strip1.Color1 = rgb_touint32Color(255, 125, 0);
+      Strip1.Interval = 100;
+      Strip1.Color1 = rgb_touint32Color(Strip1primary_red, Strip1primary_green, Strip1primary_blue);
+      Strip1.Color2 = rgb_touint32Color(Strip1secundary_red, Strip1secundary_green, Strip1secundary_blue);
       }
     Strip1.setBrightness(Strip1brightness);
     Strip1.show();
@@ -784,17 +805,23 @@ void loop()
     else if (Strip2mode == 3){
       Strip2.ActivePattern = THEATER_CHASE;
       Strip2.Interval = 100;
+      Strip2.Color1 = rgb_touint32Color(Strip2primary_red, Strip2primary_green, Strip2primary_blue);
+      Strip2.Color2 = rgb_touint32Color(Strip2secundary_red, Strip2secundary_green, Strip2secundary_blue);
       }
     else if (Strip2mode == 4){
       Strip2.ActivePattern = COLOR_WIPE;
       Strip2.TotalSteps = Strip3.numPixels();
+      Strip2.Color1 = rgb_touint32Color(Strip2primary_red, Strip2primary_green, Strip2primary_blue);
       }
     else if (Strip2mode == 5){
       Strip2.ActivePattern = SCANNER;
+      Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
       }
     else if (Strip2mode == 6){
       Strip2.ActivePattern = FADE;
-      Strip2.Interval = 20;
+      Strip2.Interval = 100;
+      Strip2.Color1 = rgb_touint32Color(Strip2primary_red, Strip2primary_green, Strip2primary_blue);
+      Strip2.Color2 = rgb_touint32Color(Strip2secundary_red, Strip2secundary_green, Strip2secundary_blue);
       }
     Strip2.setBrightness(Strip2brightness);
     Strip2.show();
@@ -814,17 +841,23 @@ void loop()
     else if (Strip3mode == 3){
       Strip3.ActivePattern = THEATER_CHASE;
       Strip3.Interval = 100;
+      Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
+      Strip3.Color2 = rgb_touint32Color(Strip3secundary_red, Strip3secundary_green, Strip3secundary_blue);
       }
     else if (Strip3mode == 4){
       Strip3.ActivePattern = COLOR_WIPE;
       Strip3.TotalSteps = Strip3.numPixels();
+      Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
       }
     else if (Strip3mode == 5){
       Strip3.ActivePattern = SCANNER;
+      Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
       }
     else if (Strip3mode == 6){
       Strip3.ActivePattern = FADE;
-      Strip3.Interval = 20;
+      Strip3.Interval = 100;
+      Strip3.Color1 = rgb_touint32Color(Strip3primary_red, Strip3primary_green, Strip3primary_blue);
+      Strip3.Color2 = rgb_touint32Color(Strip3secundary_red, Strip3secundary_green, Strip3secundary_blue);
       }
     Strip3.setBrightness(Strip3brightness);
     Strip3.show();
