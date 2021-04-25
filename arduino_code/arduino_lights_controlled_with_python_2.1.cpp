@@ -568,6 +568,7 @@ void loop()
       else if (mode == 7){
           ;
         }
+      Strip1.setBrightness(Strip1brightness);
       Strip1.show();
     }
     else if (current_strip == 1)
@@ -603,6 +604,7 @@ void loop()
       else if (mode == 7){
           ;
         }
+      Strip2.setBrightness(Strip2brightness);
       Strip2.show();
     }
     else if (current_strip == 2)
@@ -638,9 +640,10 @@ void loop()
       else if (mode == 7){
         ;
         }
+      Strip3.setBrightness(Strip3brightness);
       Strip3.show();
     }
-  else // Back to normal operation
+  else // if not connected
   {
     if (Strip1mode == 0)
     {
@@ -670,6 +673,7 @@ void loop()
       Strip1.ActivePattern = FADE;
       Strip1.Interval = 20;
       }
+    Strip1.setBrightness(Strip1brightness);
     Strip1.show();
     if (Strip2mode == 0)
     {
@@ -699,6 +703,7 @@ void loop()
       Strip2.ActivePattern = FADE;
       Strip2.Interval = 20;
       }
+    Strip2.setBrightness(Strip2brightness);
     Strip2.show();
     if (Strip3mode == 0)
     {
@@ -728,6 +733,7 @@ void loop()
       Strip3.ActivePattern = FADE;
       Strip3.Interval = 20;
       }
+    Strip3.setBrightness(Strip3brightness);
     Strip3.show();
   }
 }
