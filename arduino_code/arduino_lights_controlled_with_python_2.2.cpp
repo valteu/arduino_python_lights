@@ -572,6 +572,12 @@ void loop()
       Strip2red = red;
       Strip2blue = blue;
       Strip2brightness = brightness;
+      Strip2primary_red = primary_red;
+      Strip2primary_green = primary_green;
+      Strip2primary_blue = primary_blue;
+      Strip2secundary_red = secundary_red;
+      Strip2secundary_green = secundary_green;
+      Strip2secundary_blue = secundary_blue;
       EEPROM.write(12, Strip2mode);
       delay(10);
       EEPROM.write(13, Strip2green);
@@ -602,6 +608,12 @@ void loop()
       Strip3red = red;
       Strip3blue = blue;
       Strip3brightness = brightness;
+      Strip3primary_red = primary_red;
+      Strip3primary_green = primary_green;
+      Strip3primary_blue = primary_blue;
+      Strip3secundary_red = secundary_red;
+      Strip3secundary_green = secundary_green;
+      Strip3secundary_blue = secundary_blue;
       EEPROM.write(24, Strip3mode);
       delay(10);
       EEPROM.write(25, Strip3green);
